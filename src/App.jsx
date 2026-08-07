@@ -226,13 +226,51 @@ export default function App() {
             <div className="grid gap-8 md:grid-cols-2">
               <div className="rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/30">
                 <span className="text-sm uppercase tracking-[0.24em] text-slate-500">Ton portrait</span>
-                <p className="mt-3 text-white font-semibold">Upload une photo claire</p>
-                <p className="mt-2 text-slate-500 text-sm">Une bonne image donne un rendu plus réaliste.</p>
+                <div className="mt-5 flex flex-col gap-4">
+                  <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/90">
+                    {humanImage ? (
+                      <img src={humanImage} alt="Prévisualisation photo" className="h-48 w-full object-cover" />
+                    ) : (
+                      <div className="flex h-48 items-center justify-center text-slate-500">
+                        <Upload className="h-10 w-10" />
+                      </div>
+                    )}
+                  </div>
+                  <label className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400 cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, setHumanImage, setHumanFile)}
+                      className="hidden"
+                    />
+                    Choisir une photo
+                  </label>
+                  <p className="text-slate-500 text-sm">Une bonne image donne un rendu plus réaliste.</p>
+                </div>
               </div>
               <div className="rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/30">
                 <span className="text-sm uppercase tracking-[0.24em] text-slate-500">Ton vêtement</span>
-                <p className="mt-3 text-white font-semibold">Upload l'article</p>
-                <p className="mt-2 text-slate-500 text-sm">Haut, bas ou robe : choisis ta vibe.</p>
+                <div className="mt-5 flex flex-col gap-4">
+                  <div className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/90">
+                    {garmentImage ? (
+                      <img src={garmentImage} alt="Prévisualisation vêtement" className="h-48 w-full object-cover" />
+                    ) : (
+                      <div className="flex h-48 items-center justify-center text-slate-500">
+                        <Upload className="h-10 w-10" />
+                      </div>
+                    )}
+                  </div>
+                  <label className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400 cursor-pointer">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, setGarmentImage, setGarmentFile)}
+                      className="hidden"
+                    />
+                    Choisir un vêtement
+                  </label>
+                  <p className="text-slate-500 text-sm">Haut, bas ou robe : choisis ta vibe.</p>
+                </div>
               </div>
             </div>
 
