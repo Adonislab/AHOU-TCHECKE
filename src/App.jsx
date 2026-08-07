@@ -14,6 +14,7 @@ export default function App() {
   const [category, setCategory] = useState("upper_body");
   const [loading, setLoading] = useState(false);
   const [resultImage, setResultImage] = useState(null);
+  const [copySuccess, setCopySuccess] = useState("");
   const [error, setError] = useState(null);
 
   const handleImageUpload = (e, setImage, setFile) => {
@@ -67,6 +68,41 @@ export default function App() {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const shareText = resultImage
+    ? `Découvre mon essayage virtuel AHOU TCHECKE : ${resultImage}`
+    : "";
+  const whatsappShareUrl = resultImage
+    ? `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`
+    : "#";
+  const facebookShareUrl = resultImage
+    ? `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resultImage)}`
+    : "#";
+
+  const handleCopyLink = async () => {
+    if (!resultImage) return;
+    try {
+      await navigator.clipboard.writeText(resultImage);
+      setCopySuccess("Lien copié !");
+      setTimeout(() => setCopySuccess(""), 2500);
+    } catch (err) {
+      setCopySuccess("Impossible de copier le lien.");
+      setTimeout(() => setCopySuccess(""), 2500);
+    }
+  };
+
+  const handleNativeShare = async () => {
+    if (!resultImage || !navigator.share) return;
+    try {
+      await navigator.share({
+        title: "Essayage AHOU TCHECKE",
+        text: shareText,
+        url: resultImage,
+      });
+    } catch (err) {
+      // partage annulé ou indisponible
     }
   };
 
@@ -371,6 +407,44 @@ export default function App() {
                 >
                   Ouvrir l'image
                 </a>
+                <div className="mt-6 rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-5 shadow-xl shadow-slate-950/20">
+                  <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Partage ton look</p>
+                  <p className="mt-3 text-slate-400">Envoie ce rendu sur WhatsApp, Facebook ou copie le lien.</p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a
+                      href={whatsappShareUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-3xl bg-emerald-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500"
+                    >
+                      WhatsApp
+                    </a>
+                    <a
+                      href={facebookShareUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center rounded-3xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
+                    >
+                      Facebook
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleCopyLink}
+                      className="inline-flex items-center justify-center rounded-3xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                    >
+                      {copySuccess || "Copier le lien"}
+                    </button>
+                    {navigator.share && (
+                      <button
+                        type="button"
+                        onClick={handleNativeShare}
+                        className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400"
+                      >
+                        Partager
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
