@@ -15,6 +15,9 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [resultImage, setResultImage] = useState(null);
   const [copySuccess, setCopySuccess] = useState("");
+  const [measurements, setMeasurements] = useState(null);
+  const [suggestions, setSuggestions] = useState("");
+  const [llmLoading, setLlmLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleImageUpload = (e, setImage, setFile) => {
@@ -23,6 +26,69 @@ export default function App() {
       setFile(file);
       setImage(URL.createObjectURL(file));
       setError(null);
+    }
+  };
+
+  // Génère des mesures aléatoires (placeholder)
+  const generateMeasurements = () => {
+    const rnd = (min, max) => Math.round(min + Math.random() * (max - min));
+    const m = {
+      height_cm: rnd(150, 190),
+      chest_cm: rnd(80, 120),
+      waist_cm: rnd(60, 105),
+      hips_cm: rnd(82, 125),
+      sleeve_cm: rnd(55, 75),
+      inseam_cm: rnd(70, 90),
+    };
+    setMeasurements(m);
+    setSuggestions("");
+  };
+
+  // Récupère des suggestions depuis un LLM open-source si configuré, sinon fallback local
+  const fetchLLMSuggestions = async () => {
+    if (!measurements) {
+      setError("Génère d'abord des mesures avant de demander des suggestions.");
+      return;
+    }
+    setLlmLoading(true);
+    setError(null);
+    const LLM_API = import.meta.env.VITE_LLM_API_URL || "";
+    const prompt = `Tu es un assistant mode béninois. Donne 3 suggestions de style courtes (2-3 phrases chacune) pour une personne avec ces mesures: ${JSON.stringify(
+      measurements,
+    )} et le type de vêtement: ${category}.`;
+    try {
+      if (LLM_API) {
+        const resp = await fetch(LLM_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt }),
+        });
+        const text = await resp.text();
+        let parsed = null;
+        try {
+          parsed = JSON.parse(text);
+        } catch (_) {}
+        const resultText = parsed?.text || parsed?.message || text || "";
+        setSuggestions(resultText.trim());
+      } else {
+        // fallback local simple
+        const s = [];
+        s.push(
+          `Opte pour une coupe ajustée en haut et tissus wax légers pour mettre en valeur la silhouette (poitrine: ${measurements.chest_cm} cm).`,
+        );
+        s.push(
+          `Pour le bas, une taille haute et une longueur 3/4 créent un beau tombé (hanches: ${measurements.hips_cm} cm).`,
+        );
+        s.push(
+          `Accessoirise avec des couleurs chaudes et bijoux locaux pour renforcer le style béninois.`,
+        );
+        setSuggestions(s.join("\n\n"));
+      }
+    } catch (err) {
+      setError("Impossible d'obtenir des suggestions depuis le LLM.");
+      console.error(err);
+    } finally {
+      setLlmLoading(false);
     }
   };
 
@@ -152,6 +218,7 @@ export default function App() {
                 </div>
               </div>
             </div>
+
             <div className="relative rounded-[2rem] border border-slate-800 bg-slate-950/95 p-7 shadow-2xl shadow-slate-950/30">
               <div className="absolute -left-8 -top-8 flex h-20 w-20 items-center justify-center rounded-full bg-orange-500/15 text-orange-300 shadow-lg shadow-orange-950/20">
                 <Heart className="w-8 h-8" />
@@ -365,6 +432,8 @@ export default function App() {
                   )}
                 </button>
               </div>
+
+              
             </div>
           </div>
         </section>
@@ -444,6 +513,41 @@ export default function App() {
                       </button>
                     )}
                   </div>
+                </div>
+                <div className="mt-6 rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/20">
+                  <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Mesures & suggestions</p>
+                  <p className="mt-3 text-slate-400">Génère des mesures aléatoires et obtiens des suggestions de style basées sur ces mesures.</p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button
+                      onClick={generateMeasurements}
+                      className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-400"
+                    >
+                      Générer mesures
+                    </button>
+                    <button
+                      onClick={fetchLLMSuggestions}
+                      disabled={llmLoading || !measurements}
+                      className="inline-flex items-center justify-center rounded-3xl bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-emerald-500"
+                    >
+                      {llmLoading ? 'Chargement...' : 'Obtenir suggestions'}
+                    </button>
+                  </div>
+                  {measurements && (
+                    <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-300">
+                      <div>Hauteur: <span className="text-white font-semibold">{measurements.height_cm} cm</span></div>
+                      <div>Poitrine: <span className="text-white font-semibold">{measurements.chest_cm} cm</span></div>
+                      <div>Tour taille: <span className="text-white font-semibold">{measurements.waist_cm} cm</span></div>
+                      <div>Hanches: <span className="text-white font-semibold">{measurements.hips_cm} cm</span></div>
+                      <div>Manche: <span className="text-white font-semibold">{measurements.sleeve_cm} cm</span></div>
+                      <div>Entrejambe: <span className="text-white font-semibold">{measurements.inseam_cm} cm</span></div>
+                    </div>
+                  )}
+                  {suggestions && (
+                    <div className="mt-4 rounded-xl border border-slate-800 bg-slate-900/80 p-4 text-sm text-slate-200">
+                      <p className="font-semibold text-white">Suggestions</p>
+                      <div className="whitespace-pre-line mt-2 text-slate-300">{suggestions}</div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

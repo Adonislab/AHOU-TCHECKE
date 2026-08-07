@@ -56,6 +56,20 @@ VITE_API_URL=https://votre-api/try-on
 
 Puis redémarrez le serveur de développement.
 
+### Mesures et suggestions (LLM)
+
+Le projet propose désormais une génération de mesures aléatoires (placeholder) et des suggestions de style.
+
+- Pour activer un service LLM open-source, définissez la variable d'environnement `VITE_LLM_API_URL` pointant vers un endpoint capable de recevoir un JSON `{ prompt: string }` et de répondre par du texte brut ou JSON contenant `text`.
+
+Example `.env`:
+
+```env
+VITE_LLM_API_URL=https://mon-llm-open-source/complete
+```
+
+Si `VITE_LLM_API_URL` n'est pas configuré, l'application proposera un fallback local simple pour générer des suggestions.
+
 ## Scripts
 
 - `npm run dev` : démarre le serveur de développement
