@@ -137,12 +137,19 @@ export default function App() {
     }
   };
 
+  const formatMeasurements = (m) => {
+    if (!m) return "";
+    return `Hauteur: ${m.height_cm} cm | Poitrine: ${m.chest_cm} cm | Taille: ${m.waist_cm} cm | Hanches: ${m.hips_cm} cm | Manche: ${m.sleeve_cm} cm | Entrejambe: ${m.inseam_cm} cm`;
+  };
+
   const shareText = resultImage
-    ? `Découvre mon essayage virtuel AHOU TCHECKE : ${resultImage}`
+    ? `Découvre mon essayage virtuel AHOU TCHECKE : ${resultImage}${measurements ? "\n\nMesures: " + formatMeasurements(measurements) : ""}${suggestions ? "\n\nSuggestions: " + suggestions : ""}`
     : "";
+
   const whatsappShareUrl = resultImage
     ? `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`
     : "#";
+
   const facebookShareUrl = resultImage
     ? `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(resultImage)}`
     : "#";
@@ -150,11 +157,11 @@ export default function App() {
   const handleCopyLink = async () => {
     if (!resultImage) return;
     try {
-      await navigator.clipboard.writeText(resultImage);
-      setCopySuccess("Lien copié !");
+      await navigator.clipboard.writeText(shareText || resultImage);
+      setCopySuccess("Partage copié !");
       setTimeout(() => setCopySuccess(""), 2500);
     } catch (err) {
-      setCopySuccess("Impossible de copier le lien.");
+      setCopySuccess("Impossible de copier le partage.");
       setTimeout(() => setCopySuccess(""), 2500);
     }
   };
@@ -501,7 +508,7 @@ export default function App() {
                       onClick={handleCopyLink}
                       className="inline-flex items-center justify-center rounded-3xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
                     >
-                      {copySuccess || "Copier le lien"}
+                      {copySuccess || "Copier mon look"}
                     </button>
                     {navigator.share && (
                       <button
@@ -516,13 +523,13 @@ export default function App() {
                 </div>
                 <div className="mt-6 rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/20">
                   <p className="text-sm uppercase tracking-[0.28em] text-slate-500">Mesures & suggestions</p>
-                  <p className="mt-3 text-slate-400">Génère des mesures aléatoires et obtiens des suggestions de style basées sur ces mesures.</p>
+                  <p className="mt-3 text-slate-400">Mesures et Suggessions</p>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <button
                       onClick={generateMeasurements}
                       className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-amber-400"
                     >
-                      Générer mesures
+                      Mesures
                     </button>
                     <button
                       onClick={fetchLLMSuggestions}
