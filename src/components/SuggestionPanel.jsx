@@ -13,14 +13,15 @@ export default function SuggestionPanel({
   const labelMap = {
     user_height_cm: 'Hauteur en cm',
     longueur_bras_cm: 'Longueur bras en cm',
-    longueur_jambe_entrejambe_cm: 'Longueur entrejambe en cm',
+    longueur_jambe_entrejambe_cm: 'Longueur jambe en cm',
     hauteur_buste_cm: 'Hauteur buste en cm',
-    carrure_epaules_cm: 'Carrure épaule',
-    largeur_taille_cm: 'Longueur taille',
-    largeur_bassin_cm: 'Longueur bassin',
-    tour_de_poitrine_cm: 'Tour de poitrine',
-    tour_de_taille_cm: 'Tour de taille',
-    tour_de_hanches_cm: 'Tour de hanche',
+    carrure_epaules_cm: 'Largeur épaule en cm',
+    largeur_taille_cm: 'Largeur taille en cm',
+    largeur_bassin_cm: 'Largeur bassin en cm',
+    largeur_poitrine_cm: 'Largeur poitrine en cm',
+    tour_de_poitrine_cm: 'Tour de poitrine en cm',
+    tour_de_taille_cm: 'Tour de taille en cm',
+    tour_de_hanches_cm: 'Tour de hanche en cm',
   };
 
   const formatLabel = (key) => labelMap[key] || key;

@@ -106,11 +106,11 @@ export default function App() {
     setLlmLoading(true);
     setError(null);
     const LLM_API = import.meta.env.VITE_LLM_API_URL || "";
-    const prompt = `Tu es un assistant mode béninois. Donne 3 suggestions de style courtes (2-3 phrases chacune) pour une personne avec ces mesures: ${JSON.stringify(
+    const prompt = `Tu es un assistant mode. Donne 3 suggestions de style courtes (2-3 phrases chacune) pour une personne avec ces mesures: ${JSON.stringify(
       measurements,
       null,
       2,
-    )} et le type de vêtement: ${category}.`;
+    )} et le type de vêtement: ${category}. Propose aussi des conseils sur les couleurs, accessoires, sorties.`;
     try {
       if (LLM_API) {
         const resp = await fetch(LLM_API, {
