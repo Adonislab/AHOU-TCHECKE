@@ -17,6 +17,7 @@ export default function MeasurementEstimator({
     carrure_epaules_cm: 'Largeur épaule en cm',
     largeur_taille_cm: 'Largeur taille en cm',
     largeur_bassin_cm: 'Largeur bassin en cm',
+    largeur_poitrine_cm: 'Largeur poitrine en cm',
     tour_de_poitrine_cm: 'Tour de poitrine en cm',
     tour_de_taille_cm: 'Tour de taille en cm',
     tour_de_hanches_cm: 'Tour de hanche en cm',
