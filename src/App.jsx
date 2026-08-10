@@ -106,7 +106,7 @@ export default function App() {
     setLlmLoading(true);
     setError(null);
     const LLM_API = import.meta.env.VITE_LLM_API_URL || "";
-    const prompt = `Tu es un assistant mode. Donne 3 suggestions de style courtes (2-3 phrases chacune) pour une personne avec ces mesures: ${JSON.stringify(
+    const prompt = `Tu es un assistant mode vestimentaire. Donne 3 suggestions de style courtes (2-3 phrases chacune) pour une personne avec ces mesures: ${JSON.stringify(
       measurements,
       null,
       2,

@@ -143,15 +143,6 @@ export default function PartialTryOnPage({
                 >
                   Bas
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setCategory("dresses")}
-                  className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                    category === "dresses" ? "bg-amber-600 text-white" : "bg-slate-800 text-slate-300 hover:bg-slate-700"
-                  }`}
-                >
-                  Complet
-                </button>
               </div>
             </div>
 
