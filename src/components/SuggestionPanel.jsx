@@ -76,15 +76,15 @@ export default function SuggestionPanel({
   )}&quote=${encodeURIComponent(shareText)}`;
 
   return (
-    <div className="rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/30">
+    <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
       <div className="flex items-center justify-between gap-4 mb-5">
         <div>
-          <p className="text-sm uppercase tracking-[0.24em] text-slate-500">Suggestion</p>
-          <h3 className="mt-2 text-xl font-semibold text-white">Conseils de style</h3>
+          <p className="text-sm uppercase tracking-[0.24em] text-subtle">Suggestion</p>
+          <h3 className="mt-2 text-xl font-semibold text-ink">Conseils de style</h3>
         </div>
       </div>
 
-      <p className="text-sm leading-6 text-slate-400">
+      <p className="text-sm leading-6 text-muted">
         Obtiens une suggestion de style personnalisée basée sur tes mesures et ton style.
       </p>
 
@@ -94,7 +94,7 @@ export default function SuggestionPanel({
         onClick={onFetchSuggestions}
         className={`mt-6 w-full rounded-3xl px-4 py-3 text-sm font-semibold transition ${
           !resultImage || llmLoading
-            ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+            ? 'bg-raised text-subtle cursor-not-allowed'
             : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-orange-500/20 hover:from-amber-400 hover:to-orange-400'
         }`}
       >
@@ -110,20 +110,20 @@ export default function SuggestionPanel({
       </button>
 
       {suggestions && (
-        <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900/90 p-4 text-slate-200">
+        <div className="mt-6 rounded-3xl border border-line bg-panel/90 p-4 text-ink">
           <div className="flex flex-col gap-4">
             <div>
-              <p className="text-sm text-slate-400">Suggestions</p>
+              <p className="text-sm text-muted">Suggestions</p>
               <div className="mt-3 whitespace-pre-line text-sm leading-6">{suggestions}</div>
               {measurements && (
-                <p className="mt-4 text-xs text-slate-500">Basé sur tes mesures estimées.</p>
+                <p className="mt-4 text-xs text-subtle">Basé sur tes mesures estimées.</p>
               )}
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               <button
                 type="button"
                 onClick={handleCopy}
-                className="inline-flex items-center justify-center rounded-3xl bg-slate-800 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700"
+                className="inline-flex items-center justify-center rounded-3xl bg-raised px-4 py-3 text-sm font-semibold text-ink transition hover:bg-raised-strong"
               >
                 <Copy className="mr-2 h-4 w-4" /> {copySuccess || 'Copier'}
               </button>

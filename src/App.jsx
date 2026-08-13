@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Sparkles, AlertCircle, RefreshCw, CheckCircle2, Rocket, ShieldCheck, ImageIcon, Heart, Upload } from 'lucide-react';
+import { Sparkles, AlertCircle, RefreshCw, CheckCircle2, Rocket, ShieldCheck, ImageIcon, Heart, Upload, Sun, Moon } from 'lucide-react';
+import useTheme from './hooks/useTheme';
 import HomePage from './components/HomePage';
 import TryOnPage from './components/TryOnPage';
 import PartialTryOnPage from './components/PartialTryOnPage';
@@ -12,6 +13,8 @@ const TRY_ON_URL = import.meta.env.VITE_API_TRY_ON_URL || `${API_BASE_URL}/try-o
 const TRY_ON_OUTFIT_URL = import.meta.env.VITE_API_TRY_ON_OUTFIT_URL || `${API_BASE_URL}/try-on-outfit`;
 
 export default function App() {
+  const { theme, toggleTheme } = useTheme();
+
   const [humanImage, setHumanImage] = useState(null);
   const [humanFile, setHumanFile] = useState(null);
 
@@ -299,16 +302,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
-      <header className="border-b border-slate-800 bg-slate-900/70 backdrop-blur-xl sticky top-0 z-50 shadow-black/30">
+    <div className="min-h-screen bg-base text-ink font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+      <header className="border-b border-line bg-panel/70 backdrop-blur-xl sticky top-0 z-50 shadow-shade/30">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-500/15 border border-amber-400/20 text-amber-300 shadow-lg shadow-amber-950/20">
+            <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-500/15 border border-amber-400/20 text-accent-ink shadow-lg shadow-amber-950/20">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.32em] text-slate-500">AHOU TCHECKE</p>
-              <h1 className="text-lg font-semibold text-white">Try-On Bénin</h1>
+              <p className="text-xs uppercase tracking-[0.32em] text-subtle">AHOU TCHECKE</p>
+              <h1 className="text-lg font-semibold text-ink">Try-On Bénin</h1>
             </div>
           </div>
           <div className="flex items-center gap-3 text-sm">
@@ -318,7 +321,7 @@ export default function App() {
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "home"
                   ? "bg-amber-500 text-slate-950"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >
               Accueil
@@ -329,7 +332,7 @@ export default function App() {
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "outfit"
                   ? "bg-amber-500 text-slate-950"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >
               Essayage complet
@@ -340,16 +343,25 @@ export default function App() {
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "partial"
                   ? "bg-amber-500 text-slate-950"
-                  : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >
               Essayage partiel
             </button>
           </div>
-          <div className="hidden md:flex items-center gap-3 text-sm text-slate-400">
-            <span className="rounded-full bg-slate-800/80 px-3 py-2 border border-slate-700">Rapide</span>
-            <span className="rounded-full bg-slate-800/80 px-3 py-2 border border-slate-700">Stylé</span>
-            <span className="rounded-full bg-slate-800/80 px-3 py-2 border border-slate-700">IA</span>
+          <div className="flex items-center gap-3 text-sm text-muted">
+            <span className="hidden md:inline rounded-full bg-raised/80 px-3 py-2 border border-line-strong">Rapide</span>
+            <span className="hidden md:inline rounded-full bg-raised/80 px-3 py-2 border border-line-strong">Stylé</span>
+            <span className="hidden md:inline rounded-full bg-raised/80 px-3 py-2 border border-line-strong">IA</span>
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={theme === "dark" ? "Passer en thème clair" : "Passer en thème sombre"}
+              title={theme === "dark" ? "Passer en thème clair" : "Passer en thème sombre"}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-line-strong bg-raised/80 text-muted transition hover:bg-raised-strong hover:text-ink"
+            >
+              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
           </div>
         </div>
       </header>
