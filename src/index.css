@@ -1,7 +1,59 @@
 @import "tailwindcss";
 
+/* Tokens semantiques. Pas de "@theme inline" : les valeurs doivent rester
+   des var() pour que la surcharge [data-theme] s'applique a l'execution. */
+@theme {
+  --color-base: #020617;
+  --color-panel: #0f172a;
+  --color-raised: #1e293b;
+  --color-raised-strong: #334155;
+
+  --color-line: #1e293b;
+  --color-line-strong: #334155;
+
+  --color-ink: #ffffff;
+  --color-muted: #94a3b8;
+  --color-subtle: #64748b;
+  --color-shade: #020617;
+
+  /* Orange du logo AWU TCHECKE, identique dans les deux themes. */
+  --color-accent: #f3971a;
+  --color-accent-soft: #f7ac46;
+  --color-accent-deep: #d97c06;
+
+  --color-accent-ink: #f9b45c;
+  --color-success-ink: #6ee7b7;
+  --color-danger-ink: #fecaca;
+
+  --color-wash-from: #020617;
+  --color-wash-via: #40260a;
+  --color-wash-to: #3d1f06;
+}
+
+html[data-theme="light"] {
+  --color-base: #ffffff;
+  --color-panel: #f8fafc;
+  --color-raised: #e2e8f0;
+  --color-raised-strong: #cbd5e1;
+
+  --color-line: #e2e8f0;
+  --color-line-strong: #cbd5e1;
+
+  --color-ink: #0f172a;
+  --color-muted: #475569;
+  --color-subtle: #64748b;
+  --color-shade: #64748b;
+
+  --color-accent-ink: #a85f04;
+  --color-success-ink: #047857;
+  --color-danger-ink: #b91c1c;
+
+  --color-wash-from: #ffffff;
+  --color-wash-via: #fdf0dc;
+  --color-wash-to: #fbe3c4;
+}
+
 :root {
-  color-scheme: dark light;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -21,11 +73,15 @@ body,
 }
 
 body {
-  background-color: #0f172a;
-  color: #e2e8f0;
+  background-color: var(--color-base);
+  color: var(--color-ink);
 }
 
-img {
-  max-width: 100%;
-  display: block;
+/* Dans @layer base, sinon cette regle non-layeree l'emporte sur les
+   utilitaires Tailwind et neutralise tout max-w-* pose sur une image. */
+@layer base {
+  img {
+    max-width: 100%;
+    display: block;
+  }
 }

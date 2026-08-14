@@ -29,15 +29,15 @@ export default function MeasurementEstimator({
     if (!measurementsData) return null;
 
     return (
-      <div className="space-y-4 text-sm text-slate-200">
+      <div className="space-y-4 text-sm text-ink">
         {measurementsData.user_height_cm !== undefined && (
           <p>{formatLabel('user_height_cm')}: {measurementsData.user_height_cm}</p>
         )}
 
         {measurementsData.estimated_measurements &&
           Object.entries(measurementsData.estimated_measurements).map(([section, values]) => (
-            <div key={section} className="rounded-3xl border border-slate-800 bg-slate-900/90 p-4">
-              <p className="text-xs uppercase tracking-[0.24em] text-slate-400">{section}</p>
+            <div key={section} className="rounded-3xl border border-line bg-panel/90 p-4">
+              <p className="text-xs uppercase tracking-[0.24em] text-muted">{section}</p>
               <div className="mt-3 space-y-2">
                 {values &&
                   Object.entries(values).map(([key, value]) => (
@@ -53,23 +53,23 @@ export default function MeasurementEstimator({
   };
 
   return (
-    <div className="rounded-[1.75rem] border border-slate-800 bg-slate-950/90 p-6 shadow-xl shadow-slate-950/30">
+    <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
       <div className="flex items-center justify-between gap-4 mb-5">
         <div>
-          <p className="text-sm uppercase tracking-[0.24em] text-slate-500">Estimation</p>
-          <h3 className="mt-2 text-xl font-semibold text-white">Estime tes mensurations</h3>
+          <p className="text-sm uppercase tracking-[0.24em] text-subtle">Estimation</p>
+          <h3 className="mt-2 text-xl font-semibold text-ink">Estime tes mensurations</h3>
         </div>
       </div>
 
       <div className="space-y-4">
-        <label className="block text-sm font-semibold text-slate-300">
+        <label className="block text-sm font-semibold text-muted">
           Ta taille en cm
           <input
             type="number"
             min="100"
             value={heightCm}
             onChange={(e) => onHeightChange(e.target.value)}
-            className="mt-2 w-full rounded-3xl border border-slate-800 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-amber-500"
+            className="mt-2 w-full rounded-3xl border border-line bg-panel/90 px-4 py-3 text-ink outline-none transition focus:border-accent"
             placeholder="150"
           />
         </label>
@@ -80,8 +80,8 @@ export default function MeasurementEstimator({
           onClick={onEstimateMeasurements}
           className={`w-full rounded-3xl px-4 py-3 text-sm font-semibold transition ${
             !humanImage || !heightCm || loading
-              ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-              : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-orange-500/20 hover:from-amber-400 hover:to-orange-400'
+              ? 'bg-raised text-subtle cursor-not-allowed'
+              : 'bg-gradient-to-r from-accent to-accent-deep text-white shadow-lg shadow-accent/20 hover:from-accent-soft hover:to-accent'
           }`}
         >
           {loading ? (
@@ -94,10 +94,10 @@ export default function MeasurementEstimator({
         </button>
 
         {measurements && (
-          <div className="rounded-3xl border border-slate-800 bg-slate-900/90 p-4 text-slate-200">
-            <p className="text-sm text-slate-400">Résultats</p>
+          <div className="rounded-3xl border border-line bg-panel/90 p-4 text-ink">
+            <p className="text-sm text-muted">Résultats</p>
             {renderMeasurements(measurements)}
-            {measurementNote && <p className="mt-4 text-xs text-slate-500">{measurementNote}</p>}
+            {measurementNote && <p className="mt-4 text-xs text-subtle">{measurementNote}</p>}
           </div>
         )}
       </div>
