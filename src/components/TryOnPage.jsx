@@ -1,4 +1,5 @@
-import { Upload, Sparkles, RefreshCw, AlertCircle, CheckCircle2, ImageIcon, ShieldCheck } from 'lucide-react';
+import { Sparkles, RefreshCw, AlertCircle, CheckCircle2, ImageIcon, ShieldCheck } from 'lucide-react';
+import UploadCard from './UploadCard';
 
 export default function TryOnPage({
   humanImage,
@@ -157,107 +158,57 @@ export default function TryOnPage({
           </div>
         </div>
 
-        <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <span className="text-sm uppercase tracking-[0.24em] text-subtle">Ton portrait</span>
-              <div className="mt-5 flex flex-col gap-4">
-                <div className="overflow-hidden rounded-3xl border border-line bg-panel/90">
-                  {humanImage ? (
-                    <img src={humanImage} alt="Prévisualisation photo" className="h-48 w-full object-contain" />
-                  ) : (
-                    <div className="flex h-48 items-center justify-center text-subtle">
-                      <Upload className="h-10 w-10" />
-                    </div>
-                  )}
-                </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={onHumanImageUpload}
-                    className="hidden"
-                  />
-                  Choisir une photo
-                </label>
-                <p className="text-subtle text-sm">Une bonne image donne un rendu plus réaliste.</p>
-              </div>
-            </div>
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <span className="text-sm uppercase tracking-[0.24em] text-subtle">Ton haut</span>
-              <div className="mt-5 flex flex-col gap-4">
-                <div className="overflow-hidden rounded-3xl border border-line bg-panel/90">
-                  {topImage ? (
-                    <img src={topImage} alt="Prévisualisation haut" className="h-48 w-full object-contain" />
-                  ) : (
-                    <div className="flex h-48 items-center justify-center text-subtle">
-                      <Upload className="h-10 w-10" />
-                    </div>
-                  )}
-                </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={onTopImageUpload}
-                    className="hidden"
-                  />
-                  Choisir un haut
-                </label>
-                <p className="text-subtle text-sm">Charge une image de haut pour l’essayage.</p>
-              </div>
-            </div>
+        <div className="space-y-6">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+            <UploadCard
+              label="Ton portrait"
+              image={humanImage}
+              alt="Prévisualisation photo"
+              onChange={onHumanImageUpload}
+              buttonLabel="Choisir une photo"
+              hint="Une bonne image donne un rendu plus réaliste."
+            />
+            <UploadCard
+              label="Ton haut"
+              image={topImage}
+              alt="Prévisualisation haut"
+              onChange={onTopImageUpload}
+              buttonLabel="Choisir un haut"
+              hint="Charge une image de haut pour l’essayage."
+            />
+            <UploadCard
+              label="Ton bas"
+              image={bottomImage}
+              alt="Prévisualisation bas"
+              onChange={onBottomImageUpload}
+              buttonLabel="Choisir un bas"
+              hint="Charge une image de bas pour l’essayage."
+            />
           </div>
 
-          <div className="space-y-4">
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <span className="text-sm uppercase tracking-[0.24em] text-subtle">Ton bas</span>
-              <div className="mt-5 flex flex-col gap-4">
-                <div className="overflow-hidden rounded-3xl border border-line bg-panel/90">
-                  {bottomImage ? (
-                    <img src={bottomImage} alt="Prévisualisation bas" className="h-48 w-full object-contain" />
-                  ) : (
-                    <div className="flex h-48 items-center justify-center text-subtle">
-                      <Upload className="h-10 w-10" />
-                    </div>
-                  )}
-                </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={onBottomImageUpload}
-                    className="hidden"
-                  />
-                  Choisir un bas
-                </label>
-                <p className="text-subtle text-sm">Charge une image de bas pour l’essayage.</p>
-              </div>
-            </div>
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <p className="text-sm uppercase tracking-[0.24em] text-subtle">Générer</p>
-              <button
-                onClick={handleTryOn}
-                disabled={!humanImage || !topImage || !bottomImage || loading}
-                className={`mt-4 w-full h-14 rounded-3xl font-semibold flex items-center justify-center gap-3 transition ${
-                  !humanImage || !topImage || !bottomImage || loading
-                    ? "bg-raised text-subtle cursor-not-allowed"
-                    : "bg-gradient-to-r from-accent to-accent-deep text-white shadow-lg shadow-accent/20 hover:from-accent-soft hover:to-accent"
-                }`}
-              >
-                {loading ? (
-                  <>
-                    <RefreshCw className="w-5 h-5 animate-spin" />
-                    Génération en cours...
-                  </>
-                ) : (
-                  <>
-                    <Sparkles className="w-5 h-5" />
-                    Lancer l'essayage
-                  </>
-                )}
-              </button>
-            </div>
+          <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
+            <p className="text-sm uppercase tracking-[0.24em] text-subtle">Générer</p>
+            <button
+              onClick={handleTryOn}
+              disabled={!humanImage || !topImage || !bottomImage || loading}
+              className={`mt-4 w-full h-14 rounded-3xl font-semibold flex items-center justify-center gap-3 transition ${
+                !humanImage || !topImage || !bottomImage || loading
+                  ? "bg-raised text-subtle cursor-not-allowed"
+                  : "bg-gradient-to-r from-accent to-accent-deep text-white shadow-lg shadow-accent/20 hover:from-accent-soft hover:to-accent"
+              }`}
+            >
+              {loading ? (
+                <>
+                  <RefreshCw className="w-5 h-5 animate-spin" />
+                  Génération en cours...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-5 h-5" />
+                  Lancer l'essayage
+                </>
+              )}
+            </button>
           </div>
         </div>
       </section>

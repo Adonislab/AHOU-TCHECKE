@@ -1,5 +1,6 @@
 import React from 'react';
-import { Upload, Sparkles, RefreshCw, AlertCircle, CheckCircle2, ImageIcon, ShieldCheck } from 'lucide-react';
+import { Sparkles, RefreshCw, AlertCircle, CheckCircle2, ImageIcon, ShieldCheck } from 'lucide-react';
+import UploadCard from './UploadCard';
 
 export default function PartialTryOnPage({
   humanImage,
@@ -79,49 +80,27 @@ export default function PartialTryOnPage({
           </div>
         </div>
 
-        <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <span className="text-sm uppercase tracking-[0.24em] text-subtle">Ton portrait</span>
-              <div className="mt-5 flex flex-col gap-4">
-                <div className="overflow-hidden rounded-3xl border border-line bg-panel/90">
-                  {humanImage ? (
-                    <img src={humanImage} alt="Prévisualisation photo" className="h-48 w-full object-contain" />
-                  ) : (
-                    <div className="flex h-48 items-center justify-center text-subtle">
-                      <Upload className="h-10 w-10" />
-                    </div>
-                  )}
-                </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
-                  <input type="file" accept="image/*" onChange={onHumanImageUpload} className="hidden" />
-                  Photo complète
-                </label>
-                <p className="text-subtle text-sm">Privilégie une photo entière pour un rendu cohérent.</p>
-              </div>
-            </div>
-            <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
-              <span className="text-sm uppercase tracking-[0.24em] text-subtle">Tenue ou Pagne</span>
-              <div className="mt-5 flex flex-col gap-4">
-                <div className="overflow-hidden rounded-3xl border border-line bg-panel/90">
-                  {topImage ? (
-                    <img src={topImage} alt="Prévisualisation haut" className="h-48 w-full object-contain" />
-                  ) : (
-                    <div className="flex h-48 items-center justify-center text-subtle">
-                      <Upload className="h-10 w-10" />
-                    </div>
-                  )}
-                </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
-                  <input type="file" accept="image/*" onChange={onTopImageUpload} className="hidden" />
-                  Choisir un vêtement
-                </label>
-                <p className="text-subtle text-sm">Charge le vêtement que tu veux essayer.</p>
-              </div>
-            </div>
+        <div className="space-y-6">
+          <div className="grid gap-6 sm:grid-cols-2">
+            <UploadCard
+              label="Ton portrait"
+              image={humanImage}
+              alt="Prévisualisation photo"
+              onChange={onHumanImageUpload}
+              buttonLabel="Photo complète"
+              hint="Privilégie une photo entière pour un rendu cohérent."
+            />
+            <UploadCard
+              label="Tenue ou Pagne"
+              image={topImage}
+              alt="Prévisualisation haut"
+              onChange={onTopImageUpload}
+              buttonLabel="Choisir un vêtement"
+              hint="Charge le vêtement que tu veux essayer."
+            />
           </div>
 
-          <div className="space-y-4">
+          <div className="grid gap-6 md:grid-cols-2">
             <div className="rounded-[1.75rem] border border-line bg-base/90 p-6 shadow-xl shadow-shade/30">
               <span className="text-sm uppercase tracking-[0.24em] text-subtle">Catégorie</span>
               <div className="mt-4 flex flex-wrap gap-3 bg-panel/90 rounded-2xl border border-line p-3">
