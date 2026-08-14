@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'ahou-tchecke-theme';
+const STORAGE_KEY = 'awu-tchecke-theme';
 
 const readInitialTheme = () => {
   if (typeof window === 'undefined') return 'dark';

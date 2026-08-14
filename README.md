@@ -1,4 +1,4 @@
-# AHOU TCHECKE — Try-On Bénin
+# AWÙ TCHECKE — Try-On Bénin
 
 Une application React + Vite pour visualiser un essayage virtuel inspiré du style béninois.
 
@@ -87,7 +87,7 @@ Si `VITE_LLM_API_URL` n'est pas configuré, l'application proposera un fallback 
 ## Notes
 
 - L’application est conçue pour un rendu rapide et une expérience fluide.
-- Le branding actuel est centré sur `AHOU TCHECKE` et un univers africain béninois.
+- Le branding actuel est centré sur `AWÙ TCHECKE` et un univers africain béninois.
 
 ## Contribution
 

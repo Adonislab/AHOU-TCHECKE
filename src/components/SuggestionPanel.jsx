@@ -95,7 +95,7 @@ export default function SuggestionPanel({
         className={`mt-6 w-full rounded-3xl px-4 py-3 text-sm font-semibold transition ${
           !resultImage || llmLoading
             ? 'bg-raised text-subtle cursor-not-allowed'
-            : 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-orange-500/20 hover:from-amber-400 hover:to-orange-400'
+            : 'bg-gradient-to-r from-accent to-accent-deep text-white shadow-lg shadow-accent/20 hover:from-accent-soft hover:to-accent'
         }`}
       >
         {llmLoading ? (

@@ -27,10 +27,10 @@ export default function TryOnPage({
   return (
     <>
       <section className="relative overflow-hidden rounded-[2rem] border border-line bg-panel/80 p-10 shadow-2xl shadow-shade/40">
-        <div className="absolute inset-y-0 right-0 w-72 opacity-20 blur-3xl bg-gradient-to-br from-amber-400 via-orange-500 to-emerald-400" />
+        <div className="absolute inset-y-0 right-0 w-72 opacity-20 blur-3xl bg-gradient-to-br from-accent-soft via-accent to-accent-soft" />
         <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
           <div className="space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-2 text-sm text-accent-ink font-medium">
+            <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm text-accent-ink font-medium">
               <Sparkles className="w-4 h-4" /> Essayage instantané
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink">
@@ -52,7 +52,7 @@ export default function TryOnPage({
           </div>
 
           <div className="relative rounded-[2rem] border border-line bg-base/95 p-7 shadow-2xl shadow-shade/30">
-            <div className="absolute -left-8 -top-8 flex h-20 w-20 items-center justify-center rounded-full bg-orange-500/15 text-accent-alt-ink shadow-lg shadow-orange-950/20">
+            <div className="absolute -left-8 -top-8 flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 text-accent-ink shadow-lg shadow-shade/20">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <div className="space-y-5">
@@ -87,7 +87,7 @@ export default function TryOnPage({
               </div>
             </div>
             <p className="text-muted leading-8">
-              AHOU TCHECKE permet de tester un look béninois sans prise de tête. Télécharge ta photo et ton vêtement, et laisse l'IA générer un aperçu réaliste et stylisé.
+              AWÙ TCHECKE permet de tester un look béninois sans prise de tête. Télécharge ta photo et ton vêtement, et laisse l'IA générer un aperçu réaliste et stylisé.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <div className="rounded-3xl border border-line bg-base/90 p-5">
@@ -171,7 +171,7 @@ export default function TryOnPage({
                     </div>
                   )}
                 </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400 cursor-pointer">
+                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
                   <input
                     type="file"
                     accept="image/*"
@@ -195,7 +195,7 @@ export default function TryOnPage({
                     </div>
                   )}
                 </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400 cursor-pointer">
+                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
                   <input
                     type="file"
                     accept="image/*"
@@ -222,7 +222,7 @@ export default function TryOnPage({
                     </div>
                   )}
                 </div>
-                <label className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400 cursor-pointer">
+                <label className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft cursor-pointer">
                   <input
                     type="file"
                     accept="image/*"
@@ -242,7 +242,7 @@ export default function TryOnPage({
                 className={`mt-4 w-full h-14 rounded-3xl font-semibold flex items-center justify-center gap-3 transition ${
                   !humanImage || !topImage || !bottomImage || loading
                     ? "bg-raised text-subtle cursor-not-allowed"
-                    : "bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg shadow-orange-500/20 hover:from-amber-400 hover:to-orange-400"
+                    : "bg-gradient-to-r from-accent to-accent-deep text-white shadow-lg shadow-accent/20 hover:from-accent-soft hover:to-accent"
                 }`}
               >
                 {loading ? (
@@ -296,7 +296,7 @@ export default function TryOnPage({
                 href={resultImage}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-5 py-3 text-sm font-semibold text-white transition hover:bg-amber-400"
+                className="inline-flex items-center justify-center rounded-3xl bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft"
               >
                 Ouvrir l'image
               </a>
@@ -331,7 +331,7 @@ export default function TryOnPage({
                     <button
                       type="button"
                       onClick={handleNativeShare}
-                      className="inline-flex items-center justify-center rounded-3xl bg-amber-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-amber-400"
+                      className="inline-flex items-center justify-center rounded-3xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent-soft"
                     >
                       Partager
                     </button>

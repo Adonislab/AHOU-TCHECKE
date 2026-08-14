@@ -1,15 +1,21 @@
-import { Rocket, Heart, ShieldCheck } from 'lucide-react';
+import { Rocket, Heart } from 'lucide-react';
+import logoFull from '../assets/logo-full.png';
 
 export default function HomePage({ onNavigateToTryOn, onNavigateToPartial }) {
   return (
     <section className="rounded-[2rem] border border-line bg-panel/80 p-10 shadow-2xl shadow-shade/40">
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] items-center">
         <div className="space-y-6">
-          <span className="inline-flex items-center gap-2 rounded-full bg-amber-500/10 px-4 py-2 text-sm text-accent-ink font-medium">
+          <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm text-accent-ink font-medium">
             <Rocket className="w-4 h-4" /> Bienvenue
           </span>
+          <img
+            src={logoFull}
+            alt="AWÙ TCHECKE"
+            className="w-full max-w-[280px]"
+          />
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-ink">
-            Bienvenue sur AHOU TCHECKE
+            L'essayage virtuel béninois
           </h2>
           <p className="max-w-2xl text-muted text-lg leading-8">
             Découvre l’application de try-on béninoise. Navigue vers l'essayage pour tester un haut et un bas, ou estime tes mensurations à partir de ta photo.
@@ -28,7 +34,7 @@ export default function HomePage({ onNavigateToTryOn, onNavigateToPartial }) {
             <button
               type="button"
               onClick={onNavigateToTryOn}
-              className="rounded-3xl bg-amber-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-400"
+              className="rounded-3xl bg-accent px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-accent-soft"
             >
               Essai complet
             </button>
@@ -43,7 +49,7 @@ export default function HomePage({ onNavigateToTryOn, onNavigateToPartial }) {
         </div>
 
         <div className="relative rounded-[2rem] border border-line bg-base/95 p-7 shadow-2xl shadow-shade/30">
-          <div className="absolute -left-8 -top-8 flex h-20 w-20 items-center justify-center rounded-full bg-orange-500/15 text-accent-alt-ink shadow-lg shadow-orange-950/20">
+          <div className="absolute -left-8 -top-8 flex h-20 w-20 items-center justify-center rounded-full bg-accent/15 text-accent-ink shadow-lg shadow-shade/20">
             <Heart className="w-8 h-8" />
           </div>
           <div className="space-y-5">

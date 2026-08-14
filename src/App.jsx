@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Sparkles, AlertCircle, RefreshCw, CheckCircle2, Rocket, ShieldCheck, ImageIcon, Heart, Upload, Sun, Moon } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
+import logoMark from './assets/logo-mark.png';
 import useTheme from './hooks/useTheme';
 import HomePage from './components/HomePage';
 import TryOnPage from './components/TryOnPage';
@@ -265,7 +266,7 @@ export default function App() {
   };
 
   const shareText = resultImage
-    ? `Découvre mon essayage virtuel AHOU TCHECKE : ${resultImage}${measurements ? "\n\nMesures: " + formatMeasurements(measurements) : ""}${suggestions ? "\n\nSuggestions: " + suggestions : ""}`
+    ? `Découvre mon essayage virtuel AWÙ TCHECKE : ${resultImage}${measurements ? "\n\nMesures: " + formatMeasurements(measurements) : ""}${suggestions ? "\n\nSuggestions: " + suggestions : ""}`
     : "";
 
   const whatsappShareUrl = resultImage
@@ -292,7 +293,7 @@ export default function App() {
     if (!resultImage || !navigator.share) return;
     try {
       await navigator.share({
-        title: "Essayage AHOU TCHECKE",
+        title: "Essayage AWÙ TCHECKE",
         text: shareText,
         url: resultImage,
       });
@@ -302,16 +303,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-base text-ink font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+    <div className="min-h-screen bg-base text-ink font-sans antialiased selection:bg-accent selection:text-slate-950">
       <header className="border-b border-line bg-panel/70 backdrop-blur-xl sticky top-0 z-50 shadow-shade/30">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-amber-500/15 border border-amber-400/20 text-accent-ink shadow-lg shadow-amber-950/20">
-              <Sparkles className="w-6 h-6" />
-            </div>
+            <img src={logoMark} alt="" aria-hidden="true" className="h-11 w-auto shrink-0" />
             <div>
-              <p className="text-xs uppercase tracking-[0.32em] text-subtle">AHOU TCHECKE</p>
-              <h1 className="text-lg font-semibold text-ink">Try-On Bénin</h1>
+              <h1 className="text-lg font-extrabold uppercase tracking-[0.14em] leading-none text-ink">
+                AWÙ TCHECKE
+              </h1>
+              <p className="mt-1.5 text-xs uppercase tracking-[0.32em] text-subtle">Try-On Bénin</p>
             </div>
           </div>
           <div className="flex items-center gap-3 text-sm">
@@ -320,7 +321,7 @@ export default function App() {
               onClick={() => setActivePage("home")}
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "home"
-                  ? "bg-amber-500 text-slate-950"
+                  ? "bg-accent text-slate-950"
                   : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >
@@ -331,7 +332,7 @@ export default function App() {
               onClick={() => setActivePage("outfit")}
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "outfit"
-                  ? "bg-amber-500 text-slate-950"
+                  ? "bg-accent text-slate-950"
                   : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >
@@ -342,7 +343,7 @@ export default function App() {
               onClick={() => setActivePage("partial")}
               className={`rounded-full px-4 py-2 font-semibold transition ${
                 activePage === "partial"
-                  ? "bg-amber-500 text-slate-950"
+                  ? "bg-accent text-slate-950"
                   : "bg-raised text-muted hover:bg-raised-strong"
               }`}
             >

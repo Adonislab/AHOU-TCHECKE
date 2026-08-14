@@ -5,7 +5,7 @@ Statut : validé, prêt à implémenter
 
 ## Contexte
 
-Deux retours de test utilisateur sur le frontend AHOU TCHECKE :
+Deux retours de test utilisateur sur le frontend AWÙ TCHECKE :
 
 1. L'application n'offre aucun choix de thème — elle est en sombre imposé.
 2. Le résultat d'essayage n'est pas visible en entier. Les testeurs doivent
